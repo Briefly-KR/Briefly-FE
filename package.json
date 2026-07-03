@@ -50,13 +50,18 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "build": "expo export --platform all",
     "lint": "expo lint",
+    "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
+    "*.{js,jsx,ts,tsx,cjs,mjs}": [
       "pnpm exec eslint --fix",
+      "pnpm exec prettier --write"
+    ],
+    "*.{json,css,md,yml,yaml}": [
       "pnpm exec prettier --write"
     ]
   },
