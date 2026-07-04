@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+echo "Secrets 검사 중..."
+
+jwt_header_prefix="eyJhbGci"
+secret_pattern="sbp_[a-zA-Z0-9]{40}|${jwt_header_prefix}Oi"
+
+if secret_matches=$(git grep --cached -I -n -E "$secret_pattern" -- .); then
+  echo "커밋 대상에 Key로 보이는 값이 있습니다:"
+  echo "$secret_matches" | sed 's/^\([^:]*:[0-9][0-9]*\):.*$/  \1/'
+  exit 1
+else
+  grep_status=$?
+  if [ "$grep_status" -ne 1 ]; then
+    echo "Secrets 검사 중 오류가 발생했습니다."
+    exit "$grep_status"
+  fi
+fi
+
+pnpm exec lint-staged

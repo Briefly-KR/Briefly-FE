@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+echo "전체 ESLint 검사 중..."
+pnpm lint
+
+echo "TypeScript 타입 검사 중..."
+pnpm typecheck
+
+echo "빌드 검사 중..."
+pnpm build
