@@ -2,12 +2,154 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Briefly design tokens
+ */
 :root {
-  --font-display:
-    Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-    Segoe UI Symbol, Noto Color Emoji;
+  /* Primitive colors */
+  --white: 0 0% 100%;
+  --black: 0 0% 0%;
+  --gray-50: 0 0% 98%;
+  --gray-100: 0 0% 94%;
+  --gray-200: 0 0% 89%;
+  --gray-300: 0 0% 75%;
+  --gray-500: 0 0% 46%;
+  --gray-700: 0 0% 21%;
+  --gray-900: 0 0% 7%;
+  --red-500: 0 72% 51%;
+
+  /* Semantic colors: light theme */
+  --background: var(--white);
+  --foreground: var(--gray-900);
+  --card: var(--white);
+  --card-foreground: var(--gray-900);
+  --popover: var(--white);
+  --popover-foreground: var(--gray-900);
+
+  --primary: var(--gray-900);
+  --primary-foreground: var(--white);
+  --secondary: var(--gray-100);
+  --secondary-foreground: var(--gray-900);
+  --muted: var(--gray-50);
+  --muted-foreground: var(--gray-500);
+  --accent: var(--gray-100);
+  --accent-foreground: var(--gray-900);
+
+  --destructive: var(--red-500);
+  --destructive-foreground: var(--white);
+  --border: var(--gray-200);
+  --input: var(--gray-200);
+  --ring: var(--gray-500);
+
+  /* Typography */
+  --font-sans:
+    'Pretendard-Regular', 'Noto Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+  --font-display: var(--font-sans);
+  --font-pretendard-thin: 'Pretendard-Thin';
+  --font-pretendard-extralight: 'Pretendard-ExtraLight';
+  --font-pretendard-light: 'Pretendard-Light';
+  --font-pretendard: 'Pretendard-Regular';
+  --font-pretendard-medium: 'Pretendard-Medium';
+  --font-pretendard-semibold: 'Pretendard-SemiBold';
+  --font-pretendard-bold: 'Pretendard-Bold';
+  --font-pretendard-extrabold: 'Pretendard-ExtraBold';
+  --font-pretendard-black: 'Pretendard-Black';
   --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
   --font-rounded: 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif;
   --font-serif: Georgia, 'Times New Roman', serif;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+  --text-5xl: 48px;
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  /* Spacing */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --screen-gutter: var(--space-5);
+  --content-max-width: 480px;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.12);
+
+  /* Component-level defaults */
+  --button-height-sm: 40px;
+  --button-height-md: 48px;
+  --button-height-lg: 56px;
+  --button-padding-x: var(--space-5);
+  --input-height: 52px;
+  --card-padding: var(--space-4);
+}
+
+/* Explicit theme switching is handled by NativeWind's `dark:` variant. */
+.dark {
+  --background: var(--gray-900);
+  --foreground: var(--white);
+  --card: var(--gray-700);
+  --card-foreground: var(--white);
+  --popover: var(--gray-700);
+  --popover-foreground: var(--white);
+
+  --primary: var(--white);
+  --primary-foreground: var(--gray-900);
+  --secondary: var(--gray-700);
+  --secondary-foreground: var(--white);
+  --muted: 0 0% 14%;
+  --muted-foreground: 0 0% 68%;
+  --accent: var(--gray-700);
+  --accent-foreground: var(--white);
+
+  --destructive: 0 62% 45%;
+  --destructive-foreground: var(--white);
+  --border: 0 0% 30%;
+  --input: 0 0% 30%;
+  --ring: 0 0% 68%;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.2);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.28);
+  --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.36);
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+  }
 }
